@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}{{ org.name }}{% endblock title %}
+
+{% block content %}
+<main>
+
+    <div class="page-container">
+
+        <div class="main-section">
+            <div class="announcement-title">
+                <h1>Announcement</h1>
+            </div>
+
+            <div><a href="{% url 'announcements:list-announcement' %}">edit</a></div>
+            <hr>
+        
+            <div class="announcement_list">
+                {% for announcement in announcements %}
+                <div class="announcement_list_item">
+                    <h2 class="announcement_list_title">{{announcement.title}}</h2>
+                    {% if announcement.due_date %}
+                        <h2 class="announcement_list_due">Due: {{announcement.due_date}}</h2>
+                    {% endif %}
+                    <span class="announcement_list_text">{{announcement.text|safe}}</span>
+                    <span class="announcement_list_text">{{announcement.media_field|safe}}</span>
+                </div>
+                <div class="section-seperator-line">
+                    <hr class="section-seperator-line">
+                </div> 
+    
+                {% endfor %}
+            </div>
+        </div>
+
+
+    </div>
+</main>
+{% endblock content %}

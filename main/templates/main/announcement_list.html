@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}{{ org.name }}{% endblock title %}
+
+{% block content %}
+<div>
+    <a class="nav-link" href="{% url 'announcements:add-announcement' %}">Add New</a>
+</div>
+
+
+<div class="edit-event-list-container">
+    <table class="edit-event-table">
+        <thead class="edit-event-thead">
+            <tr class="edit-event-table">
+                <th scope="col" class="edit-event-table-column">
+                    Title
+                </th>
+                <th scope="col" class="edit-event-table-column">
+                    Text
+                </th>
+                <th scope="col" class="edit-event-table-column">
+                    Active
+                </th>
+                <th scope="col" class="edit-event-table-column">
+                    Published
+                </th>
+                <th scope="col" class="edit-event-table-column">
+                    delete
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for object in object_list  %}
+            <tr class="edit-event-table-row">
+                <td class="edit-event-table-column">
+                    <a href={{object.get_absolute_url}}>{{object.title}}</a>
+                </td>
+                <td class="edit-event-table-column">
+                    {{object.text|safe}}
+                </td>
+                <td class="edit-event-table-column">
+                    {{object.active}}
+                </td>
+                <td class="edit-event-table-column">
+                    {{object.publish_date}}
+                </td>
+                <td class="edit-event-table-column">
+                    {{object.event_date}}
+                </td>
+                <td class="edit-event-table-column">
+                    {% include 'components/buttons/delete_button.html' with href=object.delete_object %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock content %}

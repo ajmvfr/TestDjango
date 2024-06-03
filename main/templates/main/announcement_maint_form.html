@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}{{ org.name }}{% endblock title %}
+
+{% block content %}
+<div>
+    <form method="post" >
+        {% csrf_token %}
+    
+        <p>Title: {{form.title}}</p>
+        {% comment %} {{form.media}} {% endcomment %}
+        <p>Body: {{form.text|safe }}</p>
+        {% comment %} <p>Body: {{form.media_field}}</p> {% endcomment %}
+        <p>Publish Date: {{form.publish_date}}</p>
+        <p>Expire Date: {{form.expire_date}}</p>
+        <p>Active: {{form.active}}</p>
+        <p>Due Date: {{form.due_date}}</p>
+        <p>Sort:Order: {{form.sort_order}}</p>
+        {% comment %} {{form.media}} {% endcomment %}
+        {% comment %} {{form.as_p}} {% endcomment %}
+        <div class="form-group">
+            <button type="submit" class="btn btn-success">
+                <span class="glyphicon glyphicon-ok"></span> Submit
+            </button>
+            <a href="{% url 'announcements:list-announcement' %}" class="btn btn-default">Cancel</a>
+        </div>
+
+    </form>
+
+</div>
+
+{% endblock content %}
